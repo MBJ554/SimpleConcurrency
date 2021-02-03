@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleConcurrency.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace SimpleConcurrency
 {
     class Program
     {
+        public CustomerRepository customerRepository { get; set; }
         static void Main(string[] args)
         {
             new Program();
@@ -15,6 +17,7 @@ namespace SimpleConcurrency
 
         public Program()
         {
+            customerRepository = new CustomerRepository();
             Console.WriteLine("Welcome to optimistic concurrency control when updating a customer");
             Console.WriteLine("Please select an option from the menu");
             Console.WriteLine(
@@ -36,7 +39,14 @@ namespace SimpleConcurrency
 
         private void updateCustomer()
         {
-            
+            Console.WriteLine("Please enter the id of the customer you want to update!");
+            var customer = customerRepository.GetById(ReadNumber());
+            Console.WriteLine("Name: " + customer.FirstName + " " + customer.LastName);
+            Console.WriteLine("Phone: " + customer.Phone);
+            Console.WriteLine("Please enter a new birthdate.");
+            customer.Birthday = DateTime.Parse(Console.ReadLine());
+            customerRepository.UpdateCustomer(customer);
+            Console.ReadLine();
         }
 
         private int ReadNumber()
