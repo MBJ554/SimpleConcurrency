@@ -10,7 +10,7 @@ INSERT INTO [dbo].[Customer]
      VALUES
            ('Mikkel'
            ,'Jensen'
-           ,'23404540'
-           ,'Mikkelbrgger@gmail.com'
-           ,'1997-09-21')
+           ,'58585959'
+           ,'dummyemail@gmail.com'
+           ,'1995-09-23')
 GO

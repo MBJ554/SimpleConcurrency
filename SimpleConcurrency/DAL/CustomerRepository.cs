@@ -41,24 +41,25 @@ namespace SimpleConcurrency.DAL
                             ",[Birthday] = @Birthday " +
                             "WHERE Id = @Id AND RowVer = @RowVer";
                         var result = conn.Execute(sql, customer, transaction: transaction);
-                        transaction.Commit();
                         if (result == 0)
                         {
                             throw new DBConcurrencyException("There has been changes to the customer, please try again");
                         }
+                        transaction.Commit();
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         try
                         {
                             transaction.Rollback();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
 
-                            Console.WriteLine(ex.Message);
+                            throw;
                         }
-                        Console.WriteLine(e.Message);
+
+                        throw;
                     }
                 }
             }
