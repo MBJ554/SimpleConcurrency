@@ -1,5 +1,5 @@
 # SimpleConcurrency
-Simple show on how you could handle concurrency issues when updating a customer in
+Simple solution on how you could handle concurrency issues when updating a customer in
 a relational database.
 
 this makes use of dapper
